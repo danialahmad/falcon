@@ -1,0 +1,15 @@
+Dear User,
+ 
+You have been scheduled for an appointment! Here are the details.
+ 
+Date : {0}
+Time : {1}
+Staff : {2}
+Patron : {3}
+Venue : {4}
+Service : {5}
+ 
+Please sign-up / log-in at http://www.butter-bun.com if you wish to view / edit your appointment.
+ 
+Have a nice day,
+Apris Solutions

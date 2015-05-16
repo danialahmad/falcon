@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Customer Support</title>
+<link rel="stylesheet" th:href="@{/css/validationEngine.jquery.css}"
+	href="css/validationEngine.jquery.css" type="text/css" media="screen"
+	charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/styles.css}"
+	href="css/styles.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/layout.css}"
+	href="css/layout.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="../../../images/fav-icon.ico" />
+</head>
+<body>
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<img th:src="@{/images/butter-bun-logo.png}" src="./images/butter-bun-logo.png"
+					alt="Image failed to load" height="50px" width="150px" />
+				<span>Malaysia's Premier Automated Scheduler</span>
+			</div>
+			<div id="header-inf">
+				<a href="feedback" id="custsupportlink">CONTACT
+					CUSTOMER SUPPORT</a>
+			</div>
+			<div class="account-inf">
+				<ul>
+					<li><a href="../logout" id="signout">SIGN OUT</a></li>
+					<li class="editprofile">
+						<div id="editprofile">
+							Hi&#44; <span id="username" style="display: none" th:text="${#authentication.name}">username</span><span th:text="${#authentication.principal.name}">Inban</span><span
+								class="drop-arrow-white"></span> &#124;
+							<div class="drop-menu">
+								<ul class="menu-lvl-1">
+									<li><a href="editprofile">Edit Profile</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="content-wrapper">
+		<div id="nav-wrapper">
+			<div id="msg-box" class="bold">
+				<p>Dear User,</p>
+				<p>Please share your Butter-Bun experience with us.</p>
+				<p>We appreciate your feedback as it helps us enhance our product quality and service levels. </p>
+				<p>We will respond to any queries you have as soon as possible. </p>
+				<p>Thanks&#33;</p>
+				<p>Warm Regards,</p>
+				<p>Butter-Bun Administrators</p>
+			</div>
+			<div id="navarrow" class="navarrow">&nbsp;</div>
+		</div>
+		<div id="subcontent-wrapper">
+			<div id="subcontent">
+				<div id="backtodashboard">
+					<img src="./images/green-arrow.png" th:src="@{/images/green-arrow.png}" alt="Image failed to load" />
+					<a href="patron_landing">Back to Patron Dashboard</a>
+				</div>
+				<h3>Customer Support</h3>
+				<form action="#" th:object="${feedback}" th:action="@{send-feedback}" method="post" id="feedbackform">
+					<ul id="cust-support-items" class="nopadding">
+						<li>Feedback Category
+							<div>
+								<select id="type" th:field="*{feedbackType}">
+									<option value="performance">Performance</option>
+									<option value="scheduling">Scheduling</option>
+									<option value="notification">Notification</option>
+									<option value="appearance">Appearance</option>
+								</select>
+							</div>
+						</li>
+						<li>Content <br /><textarea rows="6" cols="53" th:field="*{content}" class="validate[required, maxSize[1000]]"></textarea>
+							<div>text limit&#58; 1000 characters</div>
+						</li>
+						<li>
+							<input type="submit" value="SUBMIT" class="button" id="submitbutton" />
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		<div id="sidebar-wrapper">
+			<div id="sidebar" class="bold">
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer-wrapper">
+		<div id="footer">Apris Solutions &#169; 2013 All Rights Reserved
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/lib/jquery-1.9.1.min.js}"
+		src="js/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery.validationEngine.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/languages/jquery.validationEngine-en.js}"
+		src="js/lib/jquery.validationEngine-en.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#feedbackform").validationEngine();		
+		});
+	</script>
+</body>
+</html>

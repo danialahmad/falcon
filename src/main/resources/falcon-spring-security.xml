@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<security:http pattern="/js/**" security="none" />
+	<security:http pattern="/images/**" security="none" />
+	<security:http pattern="/css/**" security="none" />
+	<security:http pattern="/index" security="none" />
+	<security:http pattern="/registration/**" security="none" />
+	<security:http pattern="/verify-identity/**" security="none" />
+	<security:http pattern="/captcha/**" security="none" />
+
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/admin/**"
+			access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/**"
+			access="IS_AUTHENTICATED_FULLY" />
+		<security:intercept-url pattern="/main"
+			access="IS_AUTHENTICATED_FULLY" />
+		<security:form-login login-page="/index" 
+			authentication-failure-url="/index?fail=true" default-target-url="/main"
+			always-use-default-target="true" />
+		<security:logout logout-url="/logout"
+			logout-success-url="/index" invalidate-session="true" />
+	</security:http>
+
+
+	<bean id="authenticateUserService"
+		class="com.twistlet.falcon.security.service.UserDetailsServiceImpl">
+	</bean>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider
+			user-service-ref="authenticateUserService">
+			<!--  security:password-encoder hash="sha-256">
+				<security:salt-source user-property="username" />
+			</security:password-encoder-->
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<bean id="securityContextService"
+		class="com.twistlet.falcon.security.service.SecurityContextServiceImpl"></bean>
+
+	<bean
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"
+		id="passwordEncoder">
+		<constructor-arg value="256" />
+	</bean>
+
+</beans>

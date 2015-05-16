@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Patron Group List</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}"
+	href="css/styles.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/layout.css}"
+	href="css/layout.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="../../../images/fav-icon.ico" />	
+</head>
+<body>
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<img th:src="@{/images/butter-bun-logo.png}"
+					src="./images/butter-bun-logo.png" alt="Image failed to load"
+					height="50px" width="150px" />
+				<span>Malaysia's Premier Automated Scheduler</span>
+			</div>
+			<div id="header-inf">
+				<a href="feedback" id="custsupportlink">CONTACT CUSTOMER SUPPORT</a>
+			</div>
+			<div class="account-inf">
+				<ul>
+					<li><a href="../logout" id="signout">SIGN OUT</a></li>
+					<li class="editprofile">
+						<div id="editprofile">
+							Hi&#44; <span th:text="${#authentication.principal.name}">Inban</span><span
+								class="drop-arrow-white"></span> &#124;
+							<div class="drop-menu">
+								<ul class="menu-lvl-1">
+									<li><a href="editprofile">Edit Profile</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="content-wrapper">
+		<div id="nav-wrapper">
+			<ul id="navlist">
+				<li><a href="admin_landing">Create Appointments</a></li>
+				<li class="bold">Manage Appointments<span class="navarrow"></span></li>
+				<li><a href="manageusers.html">Manage Staff &amp; Patrons</a></li>
+				<li><a href="send-notifications">Send Notifications</a></li>
+			</ul>
+		</div>
+		<div id="subcontent-wrapper-ext-right">
+			<div id="subcontent-ext-right">
+				<div id="backtodashboard">
+					<img src="./images/green-arrow.png"
+						th:src="@{/images/green-arrow.png}" alt="Image failed to load" />
+					<a href="manage-appointments">Back to Dashboard</a>
+				</div>
+				<h3>Patron Group List</h3>
+				<div id="result-list">
+					<div id="result-split" class="subcontent-split"></div>
+					<table id="result-table">
+						<thead>
+							<tr>
+								<th class="th1-ext">Staff</th>
+								<th class="th2-ext">Patron</th>
+								<th class="th3-ext">Venue</th>
+								<th class="th5">Service</th>
+								<th class="th6">Date</th>
+								<th class="th7">Time</th>
+								<th class="th8">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="8" style="padding: 0">
+									<div class="patronlisttable">
+										<table class="result-table-rows">
+											<tbody>
+												<tr th:each="appointmentPatron : ${appointmentPatrons}">
+													<td class="td1-ext"
+														th:text="${appointmentPatron.falconAppointment.falconStaff.name}">Trainer
+														Jack</td>
+													<td class="td2-ext"
+														th:text="${appointmentPatron.falconPatron.falconUserByPatron.name}">Kunta
+														Kinte</td>
+													<td class="td3-ext"
+														th:text="${appointmentPatron.falconAppointment.falconLocation.name}">Room
+														1</td>
+													<td class="td5"
+														th:text="${appointmentPatron.falconAppointment.falconService.name}">Yoga</td>
+													<td class="td6"
+														th:text="${#dates.format(appointmentPatron.falconAppointment.appointmentDate, 'dd/MM/yyyy')}">04&#47;12&#47;2012</td>
+													<td class="td7"
+														th:text="${#dates.format(appointmentPatron.falconAppointment.appointmentDate, 'hh:mm aaa')}">4&#58;30
+														p&#46;m&#46;</td>
+													<td class="td8">
+														<ul class="schedule-action">
+															<li><a class="remove" href="#"
+																th:id="${appointmentPatron.id}">Remove</a></li>
+														</ul>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="removeappt-box" class="absoluteleftcenter hidden">
+			<a class="close-box"
+				onclick="document.getElementById('removeappt-box').style.display='none'; document.getElementById('bg').style.display='none';"><img
+				class="whitecross" src="./images/whitecross.png"
+				th:src="@{/images/whitecross.png}" alt="Image failed to load" /><img
+				class="blackcross" src="./images/blackcross.png"
+				th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="removeappt" class="relativeleftcenter">
+				<h2>Confirm delete this appointment?</h2>
+				<ul id="getappointment" class="nopadding">
+					<li><span>Date&#58;</span>
+						<div id="deleteDate"></div></li>
+					<li><span>Time&#58;</span>
+						<div id="deleteTime"></div></li>
+					<li><span>Venue&#58;</span>
+						<div id="deleteLocation"></div></li>
+					<li><span>Staff&#58;</span>
+						<div id="deleteStaff"></div></li>
+					<li><span>Patron&#58;</span>
+						<div id="deletePatron"></div></li>
+					<li id="deleteId" style="visibility: hidden;"></li>
+					<li><input class="button" type="button" value="YES"
+						id="delete" /> <input class="button" type="button" value="NO"
+						onclick="document.getElementById('removeappt-box').style.display='none'; document.getElementById('bg').style.display='none';" />
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="rescheduleappt-box" class="absoluteleftcenter hidden">
+			<a class="close-box"
+				onclick="document.getElementById('rescheduleappt-box').style.display='none'; document.getElementById('bg').style.display='none';"><img
+				class="whitecross" src="./images/whitecross.png"
+				th:src="@{/images/whitecross.png}" alt="Image failed to load" /><img
+				class="blackcross" src="./images/blackcross.png"
+				th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="rescheduleappt" class="relativeleftcenter">
+				<h2>Reschedule Existing Appointment</h2>
+				<ul id="rescheduleapptfilter" class="nopadding">
+					<li><span>Select Patron</span><input id="patron-upd"
+						type="text" value="Patron Name" size="33" /><img
+						src="./images/drop-arrow-gray.png"
+						th:src="@{/images/drop-arrow-gray.png}" alt="Image failed to load"
+						class="drop-arrow-gray" /></li>
+					<li><span>Select Staff</span><input id="staff-upd" type="text"
+						value="Trainer Jack" size="33" /><img
+						src="./images/drop-arrow-gray.png"
+						th:src="@{/images/drop-arrow-gray.png}" alt="Image failed to load"
+						class="drop-arrow-gray" /></li>
+					<li><span>Select Date</span><input id="date-upd" type="text"
+						value="04&#47;12&#47;201" size="33" /><img
+						src="./images/drop-arrow-gray.png"
+						th:src="@{/images/drop-arrow-gray.png}" alt="Image failed to load"
+						class="drop-arrow-gray" /></li>
+					<li><span>Select Time</span><input id="time-upd" type="text"
+						value="4&#58;30 p&#46;m&#46;" size="33" /><img
+						src="./images/drop-arrow-gray.png"
+						th:src="@{/images/drop-arrow-gray.png}" alt="Image failed to load"
+						class="drop-arrow-gray" /></li>
+					<li><span>Select Venue</span><input id="venue-upd" type="text"
+						value="Room 1" size="33" /><img
+						src="./images/drop-arrow-gray.png"
+						th:src="@{/images/drop-arrow-gray.png}" alt="Image failed to load"
+						class="drop-arrow-gray" /></li>
+					<li><input class="button" type="submit" value="UPDATE" /></li>
+				</ul>
+			</div>
+		</div>
+		<div id="bg"></div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer-wrapper">
+		<div id="footer">Apris Solutions &#169; 2013 All Rights Reserved
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/lib/jquery-1.9.1.min.js}"
+		src="js/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/admin/patron_group_list.js}"
+		src="js/admin/patron_group_list.js"></script>
+</body>
+</html>

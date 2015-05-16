@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Create Appointments</title>
+<link rel="stylesheet"
+	th:href="@{/css/smoothness/jquery-ui-1.10.2.custom.min.css}"
+	href="css/smoothness/jquery-ui-1.10.2.custom.min.css" type="text/css"
+	media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/styles.css}"
+	href="css/styles.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/layout.css}"
+	href="css/layout.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/chosen.css}"
+	href="css/chosen.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/validationEngine.jquery.css}"
+	href="css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="../../../images/fav-icon.ico" />	
+<style>
+.ui-widget {
+	font-size: x-small;
+}
+</style>
+</head>
+<body>
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<img th:src="@{/images/butter-bun-logo.png}"
+					src="./images/butter-bun-logo.png" alt="Image failed to load"
+					height="50px" width="150px" />
+				<span>Malaysia's Premier Automated Scheduler</span>
+			</div>
+			<div id="header-inf">
+				<a href="feedback" id="custsupportlink">CONTACT
+					CUSTOMER SUPPORT</a>
+			</div>
+			<div class="account-inf">
+				<ul>
+					<li><a href="../logout" id="signout">SIGN OUT</a></li>
+					<li class="editprofile">
+						<div id="editprofile">
+							Hi&#44; <span id="username" style="display: none" th:text="${#authentication.name}">username</span><span th:text="${#authentication.principal.name}">Inban</span><span
+								class="drop-arrow-white"></span> &#124;
+							<div class="drop-menu">
+								<ul class="menu-lvl-1">
+									<li><a href="editprofile">Edit Profile</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="content-wrapper">
+		<div id="nav-wrapper">
+			<ul id="navlist">
+				<li class="bold">Create Appointments<span class="navarrow"></span></li>
+				<li><a href="manage-appointments">Manage Appointments</a></li>
+				<li><a href="manageusers">Manage Staff &amp; Patrons</a></li>
+				<li><a href="send-notifications">Send Notifications</a></li>
+			</ul>
+		</div>
+		<div id="subcontent-wrapper">
+			<div id="subcontent">
+				<div id="options-banner">
+					<div class="clock">
+						<div><strong>
+							<span style="display: block;" id="section-current-time" th:text="${currentTime}">current time
+							</span>
+						</strong></div>
+					</div>						
+					<div class="date-options">
+						<div id="cal-icon">
+							<img th:src="@{/images/calendar-icon.png}"
+								src="./images/calendar-icon.png" height="30px" width="35px"
+								alt="Image failed to load" />
+						</div>
+						<table>
+							<tbody>
+								<tr>
+									<td colspan="7">
+										<form id="datechooser" action="">
+											<div>
+												<select id="choosemonth">
+													<option value="0">January</option>
+													<option value="1">February</option>
+													<option value="2">March</option>
+													<option value="3">April</option>
+													<option value="4">May</option>
+													<option value="5">June</option>
+													<option value="6">July</option>
+													<option value="7">August</option>
+													<option value="8">September</option>
+													<option value="9">October</option>
+													<option value="10">November</option>
+													<option value="11">December</option>
+												</select> <select id="chooseyear">
+												</select>
+											</div>
+										</form>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div id="subcontent-split" class="subcontent-split"></div>
+				<table id="calendartable">
+					<tbody>
+						<tr>
+							<th id="tableheader" colspan="7" class="bold"><span
+								id="selectedmonth"></span> <span id="selectedyear"></span></th>
+						</tr>
+						<tr>
+							<th>sun</th>
+							<th>mon</th>
+							<th>tue</th>
+							<th>wed</th>
+							<th>thu</th>
+							<th>fri</th>
+							<th>sat</th>
+						</tr>
+					</tbody>
+					<tbody id="tablebody">
+						<tr id="calender-row-1" class="calendar-row">
+							<td id="calender-row-1-col-1">&nbsp;</td>
+							<td id="calender-row-1-col-2">&nbsp;</td>
+							<td id="calender-row-1-col-3">&nbsp;</td>
+							<td id="calender-row-1-col-4">&nbsp;</td>
+							<td id="calender-row-1-col-5">&nbsp;</td>
+							<td id="calender-row-1-col-6">1</td>
+							<td id="calender-row-1-col-7">2</td>
+						</tr>
+						<tr id="calender-row-2" class="calendar-row">
+							<td id="calender-row-2-col-1">3</td>
+							<td id="calender-row-2-col-2">4</td>
+							<td id="calender-row-2-col-3">5</td>
+							<td id="calender-row-2-col-4">6</td>
+							<td id="calender-row-2-col-5">7</td>
+							<td id="calender-row-2-col-6">8</td>
+							<td id="calender-row-2-col-7">9</td>
+						</tr>
+						<tr id="calender-row-3" class="calendar-row">
+							<td id="calender-row-3-col-1">10</td>
+							<td id="calender-row-3-col-2">11</td>
+							<td id="calender-row-3-col-3">12</td>
+							<td id="calender-row-3-col-4">13</td>
+							<td id="calender-row-3-col-5">14</td>
+							<td id="calender-row-3-col-6">15</td>
+							<td id="calender-row-3-col-7">16</td>
+						</tr>
+						<tr id="calender-row-4" class="calendar-row">
+							<td id="calender-row-4-col-1">17</td>
+							<td id="calender-row-4-col-2">18</td>
+							<td id="calender-row-4-col-3">19</td>
+							<td id="calender-row-4-col-4">20</td>
+							<td id="calender-row-4-col-5">21</td>
+							<td id="calender-row-4-col-6">22</td>
+							<td id="calender-row-4-col-7">23</td>
+						</tr>
+						<tr id="calender-row-5" class="calendar-row">
+							<td id="calender-row-5-col-1">24</td>
+							<td id="calender-row-5-col-2">25</td>
+							<td id="calender-row-5-col-3">26</td>
+							<td id="calender-row-5-col-4">27</td>
+							<td id="calender-row-5-col-5">28</td>
+							<td id="calender-row-5-col-6">29</td>
+							<td id="calender-row-5-col-7">30</td>
+						</tr>
+						<tr id="calender-row-6" class="calendar-row">
+							<td id="calender-row-6-col-1">31</td>
+							<td id="calender-row-6-col-2">&nbsp;</td>
+							<td id="calender-row-6-col-3">&nbsp;</td>
+							<td id="calender-row-6-col-4">&nbsp;</td>
+							<td id="calender-row-6-col-5">&nbsp;</td>
+							<td id="calender-row-6-col-6">&nbsp;</td>
+							<td id="calender-row-6-col-7">&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<div class="legend">
+					<ul class="legend-labels nopadding">
+						<li><span class="appt-count">[x]<img
+								class="appt-count-img-legend" height="15px" width="15px" alt="@"
+								th:src="@{/images/clock.png}" src="../images/clock.png" /></span> x =
+							Total Number of Appointments(for specific day)</li>
+						<li class="hidden"><span class="lighthousecolor"></span>Light
+							House
+							<div class="notes">&#40;Many Slots Remaining&#41;</div></li>
+						<li class="hidden"><span class="packedhousecolor"></span>Packed
+							House
+							<div class="notes">&#40;Few Slots Remaining&#41;</div></li>
+						<li class="hidden"><span class="fullhousecolor"></span>Full
+							House
+							<div class="notes">&#40;No Slots Available&#41;</div></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="createappt-box" class="absoluteleftcenter hidden">
+			<a class="close-box"
+				onclick="javascript:reset_createappt();">
+				<img class="whitecross" th:src="@{/images/whitecross.png}"
+				src="./images/whitecross.png" alt="Image failed to load" /> <img
+				th:src="@{/images/blackcross.png}" class="blackcross"
+				src="./images/blackcross.png" alt="Image failed to load" />
+			</a>
+			<form action="#" th:object="${appointment}"
+				th:action="@{create-appointment}" method="post" id="appointmentform">
+				<div id="createappt" class="relativeleftcenter">
+					<h2>Schedule Appointment</h2>
+					<ul id="createapptfilter" class="nopadding">
+						<li>
+							<span>Select Date</span> 
+							<input type="text" id="appointmentdate" class="validate[required]"/>
+						</li>
+						<li>
+							<span>Start Time</span> 
+							<input type="text" id="appointmenttime" class="validate[required]"/>
+						</li>
+						<li>
+							<span>End Time</span> 
+							<input type="text" id="appointmenttimeend" class="validate[required]"/>
+						</li>
+						<li>
+							<span>Select Patron</span> 
+							<select id="patrons" th:field="*{falconAppointmentPatrons}" multiple="multiple"
+								style="width: 350px;" class="validate[required]" />
+						</li>
+						<li>
+							<span>Select Service</span> 
+							<select id="services" style="width: 137px;" th:field="*{falconService.id}" class="validate[required]"/>
+						</li>
+						<li>
+							<span>Select Staff</span> 
+							<select id="staffs" style="width: 137px;" th:field="*{falconStaff.id}" class="validate[required]"/>
+						</li>
+						<li>
+							<span>Select Venue</span> 
+							<select id="locations" style="width: 137px;" th:field="*{falconLocation.id}" class="validate[required]" />
+						</li>
+						<li>
+							<input class="button" type="submit" value="SUBMIT" id="submit" />
+						</li>
+						<li class="notes" style="font-size: 12px">Note&#58; To edit
+							existing appointments, please use <a
+							href="manage-appointments">Manage Appointments</a>
+						</li>
+					</ul>
+					<input type="hidden" id='appointmentdatetime'
+						th:field="*{appointmentDate}"></input> <input type="hidden"
+						id='appointmentdatetimeend' th:field="*{appointmentDateEnd}"></input>
+				</div>
+			</form>
+		</div>
+		<div id="sidebar-wrapper">
+			<div id="sidebar" class="bold">
+<h5>2013 Public Holidays</h5>
+<table class="holidays" border="0" style="background-color:#FFFFFF" width="100%" cellpadding="0" cellspacing="0">
+<tr><th>Date</th><th>Holiday</th></tr>
+<tr><td>1 Jan (Tue)</td><td>New Year</td></tr>
+<tr><td>24 Jan (Thu)</td><td>Prophet Muhammad's Birthday(Maulidur Rasul)</td></tr>
+<tr><td>27 Jan (Sun)</td><td>Thaipusam</td></tr>
+<tr><td>1 Feb (Fri)</td><td>Federal Territory Day</td></tr>
+<tr><td>10 Feb (Sun)</td><td>Chinese New Year (1st day)</td></tr>
+<tr><td>11 Feb (Mon)</td><td>Chinese New Year (2nd day)</td></tr>
+<tr><td>1 May (Wed)</td><td>Labour Day</td></tr>
+<tr><td>24 May (Fri)</td><td>Vesak Day</td></tr>
+<tr><td>1 Jun (Sat)</td><td>Agong's Birthday</td></tr>
+<tr><td>26 Jul (Fri)</td><td>Nuzul Al-Quran</td></tr>
+<tr><td>8 Aug (Thu)</td><td>Hari Raya Puasa (1st day) *</td></tr>
+<tr><td>9 Aug (Fri)</td><td>Hari Raya Puasa (2nd day) *</td></tr>
+<tr><td>31 Aug (Sat)</td><td>National Day</td></tr>
+<tr><td>16 Sep (Mon)</td><td>Malaysia Day</td></tr>
+<tr><td>15 Oct (Tue)</td><td>Hari Raya Haji *</td></tr>
+<tr><td>2 Nov (Sat)</td><td>Deepavali</td></tr>
+<tr><td>5 Nov (Tue)</td><td>Awal Muharram (Maal Hijrah)</td></tr>
+<tr><td>11 Dec (Wed)</td><td>Sultan of Selangor's Birthday</td></tr>
+<tr><td>25 Dec (Wed)</td><td>Christmas</td></tr>
+</table>
+<div class="notes">* subject to change
+<br/>
+(Note: Guide is for Klang Valley only)
+</div>
+			</div>
+		</div>
+		<div id="bg"></div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer-wrapper">
+		<div id="footer">Apris Solutions &#169; 2013 All Rights Reserved
+		</div>
+	</div>
+	<div id="dialog">
+		<div>Please pick a time</div>
+		<table>
+			<tr>
+				<td><span class="ui-icon ui-icon-circle-triangle-n" id="button-up-hh"/></td>
+				<td><span class="ui-icon ui-icon-circle-triangle-n" id="button-up-mm"/></td>
+				<td><span class="ui-icon ui-icon-circle-triangle-n" id="button-up-ampm"/></td>
+			</tr>
+			<tr>
+				<td><input id="hh" type="text" size="2" /></td>
+				<td><input id="mm" type="text" size="2" /></td>
+				<td><input id="ampm" type="text" size="2" /></td>
+			</tr>
+			<tr>
+				<td><span class="ui-icon ui-icon-circle-triangle-s" id="button-down-hh"/></td>
+				<td><span class="ui-icon ui-icon-circle-triangle-s" id="button-down-mm"/></td>
+				<td><span class="ui-icon ui-icon-circle-triangle-s" id="button-down-ampm"/></td>
+			</tr>
+		</table>
+		<div style="display: none;" id="source-id"></div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/lib/jquery-1.9.1.min.js}"
+		src="js/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery-ui-1.10.2.custom.min.js}"
+		src="js/lib/jquery-ui-1.10.2.custom.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery-ui-sliderAccess.js}"
+		src="js/lib/jquery-ui-sliderAccess.js"></script>
+	<script type="text/javascript" th:src="@{/js/lib/chosen.jquery.min.js}"
+		src="js/lib/chosen.jquery.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/lib/jquery.validationEngine.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript" th:src="@{/js/lib/languages/jquery.validationEngine-en.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript" th:src="@{/js/admin/admin_landing.js}"
+		src="js/admin/admin_landing.js"></script>
+	<script type="text/javascript" th:src="@{/js/show_date_time.js}"
+		src="js/show_date_time.js"></script>
+		
+</body>
+</html>

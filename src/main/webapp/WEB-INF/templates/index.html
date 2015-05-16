@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Butter&#45;Bun Homepage</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}"
+	href="css/styles.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/layout.css}"
+	href="css/layout.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="../../images/fav-icon.ico" />	
+</head>
+<body>
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<img th:src="@{/images/butter-bun-logo.png}"
+					src="./images/butter-bun-logo.png" alt="Image failed to load"
+					height="50px" width="150px" />
+				<span>Malaysia's Premier Automated Scheduler</span>
+			</div>
+			<div id="header-inf" class="hidden">
+				<a href="customersupport.html" id="custsupportlink">CONTACT
+					CUSTOMER SUPPORT</a>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="content-wrapper">
+		<div id="main-wrapper">
+			<div class="login">
+				<h2>Sign in to your account</h2>
+				<form th:action="@{/j_spring_security_check}" method="post">
+					<div class="login-label">
+						<span>User ID&#58;</span> <input type="text" value=""
+							name="j_username" class="login-inp" />
+					</div>
+					<div class="login-label">
+						<span>Password&#58;</span> <input type="password"
+							name="j_password" class="login-inp" />
+					</div>
+					<div>
+						<ul class="nopadding">
+							<li><a href="#" id="forgotpwd">forgot your password?</a> <input
+								type="submit" value="SIGN IN" class="button" id="loginbutton" /></li>
+							<li id="newuserinf" class="hidden"><span>New User&#63; Sign Up
+									Now&#33;</span> <input type="button" value="SIGN UP" class="button"
+								id="signupbutton" /></li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			<div class="col-left">
+				<div class="col-head bold">Welcome</div>			
+				<div class="col-content">
+					<p>Butter-Bun is an <b>Online Appointment Scheduling Software</b> with E-Mail &amp; SMS Notification Service. It is user-friendly, convenient, powerful and affordable.
+					</p>
+					<p style="margin-bottom:0px;"><b>Try Us</b>: Sign in to a preview account using the following credentials :-
+					</p>	
+					<ul style="padding-left:10px;margin-top:0px;">
+						<li>User ID : demo@butter-bun.com</li>
+						<li>Password: demoapris</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-mid">
+				<div class="col-head bold">Join Us</div>
+				<div class="col-content">				
+				<p>We are offering a <b>two weeks free trial</b> if you <a href="http://www.apris-solutions.com/reg-bb.html">sign up</a> right now.</p>
+				<p>Contact us at <a href="mailto:sales@apris-solutions.com">sales@apris-solutions.com</a> for more info or to request a walk-in demo at your location.</p>
+				</div>
+			</div>
+			<div class="col-right">
+				<div class="col-head bold">Customer Support</div>
+				<div class="col-content">
+				<p>Facing an issue or have feedback?</p>
+				<p>Drop us a line at <a href="mailto:support@butter-bun.com">support@butter-bun.com</a> and we will get back to you <b>as soon as possible</b>.</p>
+				</div>
+			</div>
+		</div>
+		<div id="sidebar-wrapper">
+			<div id="sidebar" class="bold">
+				<div class="social-bg">
+				<h3>Follow Us:</h3>
+				<ul>
+				<li><a href="http://www.facebook.com/pages/Butter-Bun/364305490347464" class="sprite-fb"><span>On Facebook</span></a></li>
+				<li><a href="http://plus.google.com/u/0/100435016393666376233/about" class="sprite-gplus"><span>On Google Plus</span></a></li>
+				<li><a href="http://www.linkedin.com/company/apris-solutions-sdn-bhd-/butter-bun-1704912/product?trk=biz_product" class="sprite-linkedin"><span>On LinkedIn</span></a></li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		<div id="resetpasswordappt-box" class="absoluteleftcenter hidden">
+			<a class="close-box"
+				onclick="javascript: closeDialog();"><img
+				class="whitecross" src="./images/whitecross.png"
+				th:src="@{/images/whitecross.png}" alt="Image failed to load" /><img
+				class="blackcross" src="./images/blackcross.png"
+				th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="rescheduleappt" class="relativeleftcenter">
+				<form id="verifyIdentity" action="verify-identity" method="post">
+				<h2>Reset Password</h2>
+				<ul id="resetpwdtfilter" class="nopadding">
+					<li><div id="resetAlert" style="visibility: hidden; color: red;"></div></li>
+					<li><span style="font-weight: bold;">IC No&#58;</span>
+						<input name="nric" /></li>
+					<li>&nbsp;</li>
+					<li><input class="button" type="submit" id="resetPassword"
+						value="RESET" /></li>
+				</ul>
+				</form>
+			</div>
+		</div>
+		<div id="bg"></div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer-wrapper">
+		<div id="footer">Apris Solutions &#169; 2013 All Rights Reserved
+		</div>
+	</div>
+	<script type="text/javascript" src="../../js/lib/jquery-1.9.1.min.js"
+		th:src="@{/js/lib/jquery-1.9.1.min.js}"></script>
+	<script type="text/javascript" src="../../js/index.js"
+		th:src="@{/js/index.js}"></script>
+	<div style="display: none;">
+		<a id="registration-link" href="registration/index"
+			th:href="@{/registration/index}"></a>
+	</div>
+</body>
+</html>

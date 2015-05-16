@@ -1,0 +1,17 @@
+<div>Dear User,</div>
+<div>Your e-mail address is your user id for future sign-in''s<div>
+<br/>
+<div>
+<div>Full Name: {0}</div>
+<div>I.C No: {1}</div>
+<div>HP: {2}</div>
+<div>Email: {3}</div>
+<div>Password: {4}</div>
+<div>Patron of {5}</div>
+</div>
+<div>
+<br/>
+<div>Please proceed to log-in at <a href="https://www.butter-bun.com/">www.butter-bun.com</a> & schedule away!</div>
+<div>Warm Regards,</div>
+<div>Apris Solutions</div>
+</div>

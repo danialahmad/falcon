@@ -1,0 +1,194 @@
+/* Wrappers 
+-------------------------------------------------
+*/
+#header-wrapper                                  {background: none repeat scroll 0 0 #00A99D; height: 70px; width: 930px; display: block; float: left;}
+#content-wrapper                                 {background: none repeat scroll 0 0 #E6E6E6; width: 930px; height: 570px; display: block; margin: 0 auto;}
+#main-wrapper                                    {float: left; width: 708px; height: 500px; margin: 0; word-wrap: break-word; overflow: hidden;   display: block;}
+#sidebar-wrapper                                 {height: 500px; width: 222px; float: left; margin: 0; word-wrap: break-word;}
+#nav-wrapper                                     {float: left; width: 204px; height: 500px; margin: 0; word-wrap: break-word; display: block;}
+#content-error-wrapper                           {float: left; width: 914px; height: 500px; margin: 0; word-wrap: break-word; overflow: hidden; display: block;}
+#subcontent-wrapper                              {float: left; width: 504px; height: 500px; margin: 0; word-wrap: break-word; overflow: hidden; display: block;}
+#subcontent-wrapper-ext-right                    {float: left; width: 726px; height: 500px; margin: 0; word-wrap: break-word; overflow: hidden; display: block;}
+#subcontent-wrapper-ext-left                     {float: left; width: 708px; height: 500px; margin: 0; word-wrap: break-word; overflow: hidden; display: block;}
+#footer-wrapper                                  {background: none repeat scroll 0 0 #E6E6E6; width: 930px; height: 90px; display: block; float: left;}
+
+/* Layout - IDs
+-------------------------------------------------
+*/
+#ad-banner                                       {position: relative; top: 250px;}
+#addorg                                          {background: none repeat scroll 0 0 #FFFFFF; border: 5px solid #22B574; padding: 0 30px 16px; min-width: 360px; 
+                                                  z-index: 1000; top: 70px;}
+#addorg-inf:hover #addorg-inf-msg                {display:block;}
+#addorg-inf-msg                                  {border: 1px solid; font-size: 12px; padding: 4px; width: 200px; position: relative; right: 170px; top: -20px; 
+                                                  text-align: left; display:none;}
+#addorgfilter li                                 {display: block; padding: 4px;}
+#addorgfilter span                               {float: left; width: 100px;}
+#backtodashboard                                 {text-align: right;width: 200px; position: relative; right: 16px; float: right;}
+#backtodashboard img                             {position:relative; top: 2px;}
+#bg                                              {background: none repeat scroll 0 0 #E6E6E6; height: 100%; left: 0; opacity: 0.9; position: relative; top: 0; 
+                                                  width: 930px; z-index: 800; display: none;}
+#cal-icon                                        {position: relative; height: 40px; display: block; float: left; top: -8px;}
+#cal-icon img                                    {position: relative; top: 8px;}
+#calendartable                                   {width: 448px; position: relative; right: -5px; table-layout: fixed; border: 0; align: center;}
+#calendartable td                                {text-align:center; width: 64px; height: 40px; padding: 0.25em; text-align: left; vertical-align: bottom; 
+                                                  border: 1px solid #E6E6E6;}
+#captchaimg                                      {padding-top: 20px;}
+#confirmreg                                      {background: none repeat scroll 0 0 #FFFFFF; border: 5px solid #22B574; padding: 0 30px; min-width: 360px; 
+                                                  z-index: 1000; top: 70px;}
+#content-error                                   {background: none repeat scroll 0 0 #FFFFFF; width: 898px; height: 422px; margin: 16px; padding: 14px 0 0 16px; 
+                                                  display: block;}
+#createappt                                      {background: none repeat scroll 0 0 #FFFFFF; border: 5px solid #22B574; padding: 0 30px; min-width: 360px; 
+                                                  z-index: 1000; top: 70px;}
+#createapptfilter span                           {float: left; width: 100px;}
+#createapptfilter li                             {display: block; padding: 4px;}
+#cust-support-items li                           {display: block; padding: 4px;}
+#editprofile                                     {display: inline;}
+#editprofile-info                                {padding-left: 0px;}
+#editprofile-info li                             {padding: 4px;}
+#editprofile-info span                           {float: left; width: 80px;}
+#editprofile-info .notes                         {float: none;}
+#editprofile-split                               {height: 2px; width: 488px; position: relative; left: -16px; margin-bottom: 10px; }
+#footer                                          {text-align:center; height: 60px; position: relative; top: 65px;}
+
+#getappointment li                               {display: block; padding: 4px;}
+#getappointment li input                         {margin: 0 30px 10px;}
+#getappointment li span                          {float: left; width: 70px; font-weight:bold;}
+#getregistration li                              {display: block; padding: 4px;}
+#getregistration li input                        {margin: 0 30px 10px;}
+#getregistration li span                         {float: left; width: 100px; font-weight:bold;}
+#header                                          {display: block; float: left; padding: 10px; height: 50px;}
+#header-inf                                      {float: left; text-align: right; width: 500px;}
+
+#loginbutton                                     {float: right;position: relative; bottom: 4px;}
+#logo                                            {bottom: 5px; float: left; height: 100%; position: relative; width: 400px;}
+#logopos                                         {bottom: 30px; float: right; position: relative; left: 20px;}
+#msg-box                                         {background: none repeat scroll 0 0 #FFFFFF; border-style: solid; border-width: 2px; border-color: #1F1F1F; 
+                                                  height: 480px; margin: 16px; position: relative; text-align: center; width: 190px; z-index: 15; padding: 0; 
+                                                  left: 0px;}
+#msg-box p                                       {text-align: left; margin: 10px;}
+#navarrow                                        {left: 25px; line-height: 42px; position: relative; top: -480px;}
+#navlist                                         {padding: 16px 0 0 26px; position: relative; z-index: 20; width: 194px;display: block;}
+#navlist li                                      {height: 42px;}
+#navlist li span                                 {bottom: 30px; display: block; height: 100%; position: relative; width: 100%; z-index: -1;}
+
+#notification-items li                           {display: block; padding: 4px;}
+#options-banner                                  {display: inline; float: left; width: 100%;}
+#org-list                                        {margin-top: 25px;}
+#org-logo                                        {bottom: 6px; float: right; position: relative; right: 70px;}
+#org-members                                     {margin-top: 4px;}   
+#patron-controls                                 {display: block; float:right; padding-right: 16px; text-align: right; font-size: 16px; font-weight: bold; width:180px;}
+#querybutton                                     {float: right; position:relative; top:-4px}
+#query-items                                     {padding: 0; margin: 0; width: 380px; display: block; float: left; width: 100%;}
+#query-items li                                  {display: block; padding-bottom: 8px; padding-right: 4px; float: left;}
+#query-items li span                             {float: left; width: 70px;}
+#recepient                                       {width: 280px;}
+#reg-info li                                     {margin:0px; padding: 4px;}
+#reg-info .notes                                 {float: none;}
+#reg-info span                                   {float: left; width: 100px;}
+#removeappt                                      {background: none repeat scroll 0 0 #FFFFFF; border: 5px solid #22B574; padding: 0 30px 16px; min-width: 360px; 
+                                                  z-index: 1000; top: 70px;}
+#rescheduleappt                                  {background: none repeat scroll 0 0 #FFFFFF; border: 5px solid #22B574; padding: 0 30px 16px; min-width: 360px; 
+                                                  z-index: 1000; top: 70px;}
+#rescheduleapptfilter span                       {float: left; width: 120px;}
+#rescheduleapptfilter li                         {display: block; padding: 4px;}
+#result-list                                     {margin-top: 15px; display: block; float: left;}
+#result-split                                    {height: 2px; width: 710px; position: relative; left: -16px; margin-bottom: 10px;}
+#result-table                                    {padding-right: 48px; width: 710px;}
+#result-table th                                 {padding: 4px; text-align: left;}
+#result-table td                                 {vertical-align: top; height: 48px; text-align: left;}
+#result-table td td                              {padding-left: 4px;}
+#searchicon                                      {position: relative; top: 6px;}
+#searchfilters                                   {float:left; width: 480px;}
+#sidebar                                         {background: none repeat scroll 0 0 #FFFFFF; width: 190px; height: 484px; margin: 16px; text-align: center;}
+#signupbutton                                    {float: right;position: relative; bottom: 4px;}
+#subcontent                                      {background: none repeat scroll 0 0 #FFFFFF; width: 472px; height: 484px;  margin: 16px; padding: 14px 0 0 16px;}
+#subcontent h3                                   {margin-top: 0;}
+#subcontent-ext-left                             {background: none repeat scroll 0 0 #FFFFFF; width: 676px; height: 422px;  margin: 16px; padding: 14px 0 0 16px; 
+                                                  display: block;}
+#subcontent-ext-left h3                          {margin-top: 0;}
+#subcontent-ext-left-head                        {display: block; padding-left: 16px;}
+#subcontent-ext-right                            {background: none repeat scroll 0 0 #FFFFFF; width: 678px; height: 484px;  margin: 16px; padding: 14px 0 0 16px; 
+                                                  display: block;}
+#subcontent-ext-right h3                         {margin-top: 0;}
+#subcontent-split                                {height: 2px; width: 488px; position: relative; left: -16px; top: 35px;}
+#subcontent-split2                               {height: 2px; width: 488px; position: relative; left: -16px; top: 15px;}
+#subcontent-tabbed                               {background: none repeat scroll 0 0 #FFFFFF; width: 488px; height: 484px;  margin: 16px; padding: 0 16px 0 0;}
+#tab-nav                                         {background: none repeat scroll 0 0 #E6E6E6;}
+#tab-nav ol                                      {height: 40px; left: -25px; overflow: hidden; padding: 0 60px 0 25px; position: relative; right: -85px; width: 100%;}
+#tab-nav ol a.active:hover, #tab-nav ol a.active {font-weight: bold; height: 40px; background-position: 0 0;}
+#tab-nav ol a.active:hover span, #tab-nav ol a.active span{background-position: 100% 0px;}
+#tab-nav ol a:hover                              {background-position: 0 -120px;}
+#tab-nav ol a:hover span                         {background-position: 100% -120px;}
+#tab-nav ol li                                   {float: left; margin: 0 3px 0 0;}
+
+#tab-window                                      {width: 100%; float: left; padding: 0 0 0 16px;}
+#tab-window ul                                   {padding: 16px 0 0 0;}
+#tab-window div ul li                            {display: block; padding: 4px; float: left; width: 100%;}
+#tab-window div ul li span                       {float: left; width: 100px;}
+#tablebody tr td:hover                           {border: 1px solid #22B574; font-weight: bold;}
+
+/* Layout - Classes
+-------------------------------------------------
+*/
+.account-inf                                     {position: relative; text-align: right; width: 500px; float: left;}
+.account-inf ul                                  {margin-top: 4px; padding-top: 0;}
+.account-inf ul li                               {float: right; height: 32px;}
+.account-inf ul li a                             {margin: 0 2px;}
+.blackcross                                      {display: none; z-index: 1800; position: relative;}
+.close-box                                       {top: 90px; left: 47%; z-index: 1500; position: relative;}
+.col-content                                     {margin:10px; position: relative; top: -10px;}
+.col-head                                        {margin:10px;}
+.col-left                                        {background: none repeat scroll 0 0 #FFFFFF; width: 220px; height: 270px; margin: 16px 0 0 16px; float: left;}
+.col-mid                                         {background: none repeat scroll 0 0 #FFFFFF; width: 220px; height: 270px; margin: 16px 0 0 16px; float: left;}
+.col-right                                       {background: none repeat scroll 0 0 #FFFFFF; width: 220px; height: 270px; margin: 16px 0 0 16px; float: left;}
+.drop-arrow-gray                                 {position: relative; right: 20px;}
+
+.drop-menu                                       {display: inline-block; width: 100%; margin: 4px; position: relative; top: 5px; right: 15px;}
+.drop-menu ul                                    {display: block; font-weight: bold; margin: 0; float: right;}
+.drop-menu ul li                                 {border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; display: block; 
+                                                  width: 100%; padding-right: 4px;}
+.drop-menu .menu-lvl-1                           {display: none;}     
+.innertable1                                     {height: 260px; overflow: auto;}
+.innertable2                                     {height: 180px; overflow: auto;}
+.patronlisttable                                 {height: 350px; overflow: auto;}
+.legend                                          {width: 450px; position: relative; top: -15px; left: 5px;}
+.login                                           {background: none repeat scroll 0 0 #FFFFFF; width: 692px; height: 200px; margin: 16px 0 0 16px; float: left;}
+.login h2                                        {text-align: center; margin-bottom: 4px;}
+.login-inp                                       {width: 340px; height: 28px;}
+.login-label                                     {text-align: center;}
+.login-label span                                {display: block; float: left; width: 100px; position: relative; top:6px; left:120px;text-align: right;}
+.login li                                        {width: 342px; float: left; padding-left: 226px;padding-bottom: 2px;}
+.login ul                                        {position: relative; top: -6px; }
+.result-table-rows                               {border-collapse: collapse;}
+.schedule-action                                 {padding: 0px; margin: 0px;}
+.th1                                             {width: 75px;}
+.th2                                             {width: 75px;}
+.th3                                             {width: 75px;}
+.th4                                             {width: 75px;}
+.th5                                             {width: 83px;}
+.th6                                             {width: 83px;}
+.th7                                             {width: 83px;}
+.th8                                             {width: 81px;}
+.td1                                             {width: 75px;}
+.td2                                             {width: 75px;}
+.td3                                             {width: 75px;}
+.td4                                             {width: 75px;}
+.td5                                             {width: 83px;}
+.td6                                             {width: 83px;}
+.td7                                             {width: 83px;}
+.td8                                             {width: 61px;}
+.th1-ext                                         {width: 100px;}
+.th2-ext                                         {width: 100px;}
+.th3-ext                                         {width: 100px;}
+.td1-ext                                         {width: 100px;}
+.td2-ext                                         {width: 100px;}
+.td3-ext                                         {width: 100px;}
+
+/* Layout - Misc
+-------------------------------------------------
+*/
+a.close-box:hover img.blackcross                 {display: inline; visibility: visible;}
+a.close-box:hover img.whitecross                 {display: none;}
+li.editprofile:hover .drop-menu .menu-lvl-1      {display: block;}
+ul.legend-labels li                              {float: left; display; block;  width: 130px;}
+ul.legend-labels li span                         {display: block; float: left; height: 15px; width: 15px; margin-right: 5px; margin-top: 4px; border: none;}

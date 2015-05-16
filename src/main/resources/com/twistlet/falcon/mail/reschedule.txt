@@ -1,0 +1,19 @@
+<div>
+<div>Dear User,</div>
+<div>Your appointment has been rescheduled. Here are the new details</div>
+</div>
+<br/>
+<div>
+<div>Date : {0}</div>
+<div>Time : {1}</div>
+<div>Staff : {2}</div>
+<div>Patron : {3}</div>
+<div>Venue : {4}</div>
+<div>Service : {5}</div>
+</div>
+<br/>
+<div>
+<div>Please log-in at <a href="https://www.butter-bun.com">www.butter-bun.com</a> if you wish to view your appointment.</div>
+<div>Have a nice day,</div>
+<div>Apris Solutions</div>
+</div>

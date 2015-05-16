@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Send Notifications</title>
+<link rel="stylesheet"
+	th:href="@{/css/smoothness/jquery-ui-1.10.2.custom.min.css}"
+	href="css/smoothness/jquery-ui-1.10.2.custom.min.css" type="text/css"
+	media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/styles.css}"
+	href="css/styles.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/layout.css}"
+	href="css/layout.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/chosen.css}"
+	href="css/chosen.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/validationEngine.jquery.css}"
+	href="css/validationEngine.jquery.css" type="text/css" media="screen"
+	charset="utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="../../../images/fav-icon.ico" />	
+<style>
+.ui-widget {
+	font-size: x-small;
+}
+</style>
+</head>
+<body>
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<img th:src="@{/images/butter-bun-logo.png}"
+					src="./images/butter-bun-logo.png" alt="Image failed to load"
+					height="50px" width="150px" />
+				<span>Malaysia's Premier Automated Scheduler</span>
+			</div>
+			<div id="header-inf">
+				<a href="feedback" id="custsupportlink">CONTACT CUSTOMER SUPPORT</a>
+			</div>
+			<div class="account-inf">
+				<ul>
+					<li><a href="../logout" id="signout">SIGN OUT</a></li>
+					<li class="editprofile">
+						<div id="editprofile">
+							Hi&#44; <span id="username" style="display: none" th:text="${#authentication.name}">username</span><span th:text="${#authentication.principal.name}">Inban</span><span
+								class="drop-arrow-white"></span> &#124;
+							<div class="drop-menu">
+								<ul class="menu-lvl-1">
+									<li><a href="editprofile">Edit Profile</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="content-wrapper">
+		<div id="nav-wrapper">
+			<ul id="navlist">
+				<li><a href="admin_landing">Create Appointments</a></li>
+				<li><a href="manage-appointments">Manage Appointments</a></li>
+				<li><a href="manageusers">Manage Staff &amp; Patrons</a></li>
+				<li class="bold">Send Notifications<span class="navarrow"></span></li>
+			</ul>
+		</div>
+		<div id="subcontent-wrapper">
+
+			<div id="subcontent">
+				<form id="form-send-notification" action=""
+					th:action="@{/admin/notification/send-to-patient}">
+					<div>
+						<div>Recipient</div>
+						<div>
+							<select id="notification-send-target" name="username"></select>
+						</div>
+					</div>
+					<div>
+						<div>Type</div>
+						<div>
+							<div>
+								<input id="check-sms" name="sms" type="checkbox" /><span>SMS
+									Notification</span>
+							</div>
+							<div>
+								<input id="check-mail" name="mail" type="checkbox" /><span>Email
+									Notification</span>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div>Content</div>
+						<div>
+							<textarea id="message" name="message" rows="6" cols="53"></textarea>
+						</div>
+						<div>text limit: <span id="limit-message-size">120</span> characters</div>
+						<div>text remaining: <span id="limit-message-remaining">120</span> characters</div>
+					</div>
+					<div>
+						<input id="button-submit" type="button" class="button"
+							value="SUBMIT" />
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+		<div id="sidebar-wrapper">
+			<div id="sidebar" class="bold">
+				<div id="msg-box-right">
+				<p>The SMS notifications that you send from this page will be deducted from your total SMS Balance.</p>
+				<p>We are constantly monitoring this to ensure you have sufficient balance to conduct your day-to-day notifications.</p>
+				<p>Should your balance fall below 100 SMS&#39;s, we will prompt you for a reload.</p>
+				<p>Drop us a line at <a href="mailto:support@butter-bun.com">support@butter-bun.com</a> to check your current balance and for pricing information on our SMS packages.</p>
+				</div>
+			</div>
+		</div>
+		<div id="bg"></div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer-wrapper">
+		<div id="footer">Apris Solutions &#169; 2013 All Rights Reserved
+		</div>
+	</div>
+	<div id="section-hidden" style="display: none;">
+		<div id="section-link-list-patrons">
+			<a id="link-list-patrons" href="/admin/notification/list-patrons"
+				th:href="@{/admin/notification/list-patrons}">Hidden Link</a>
+		</div>
+		<div id="section-link-patron-info">
+			<a id="link-user-info" href="/admin/notification/user-info"
+				th:href="@{/admin/notification/user-info}">Hidden Link</a>
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/lib/jquery-1.9.1.min.js}"
+		src="js/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/lib/jquery.blockUI.js}"
+		src="js/lib/jquery.blockUI.js"></script>
+	<script type="text/javascript" th:src="@{/js/lib/jquery.form.min.js}"
+		src="js/lib/jquery.form.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery-ui-1.10.2.custom.min.js}"
+		src="js/lib/jquery-ui-1.10.2.custom.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/admin/send-notifications.js}"
+		src="js/admin/send-notifications.js"></script>
+</body>
+</html>

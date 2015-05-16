@@ -1,0 +1,14 @@
+Dear User,
+ 
+Your email address is your user id for future sign-ins.
+ 
+Full Name: {0}
+IC NO: {1}
+HP: {2}
+email: {3}
+Patron of {4}
+ 
+Please proceed to log in & schedule away!
+ 
+Warm Regards,
+Apris Solutions

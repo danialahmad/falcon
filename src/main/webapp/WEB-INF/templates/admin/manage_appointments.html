@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Manage Appointments</title>
+<link rel="stylesheet" th:href="@{/css/jquery-ui-timepicker-addon.css}"
+	href="css/jquery-ui-timepicker-addon.css" type="text/css"
+	media="screen" charset="utf-8" />
+<link rel="stylesheet"
+	th:href="@{/css/smoothness/jquery-ui-1.10.2.custom.min.css}"
+	href="css/smoothness/jquery-ui-1.10.2.custom.min.css" type="text/css"
+	media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/styles.css}"
+	href="css/styles.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/layout.css}"
+	href="css/layout.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/chosen.css}"
+	href="css/chosen.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/validationEngine.jquery.css}"
+	href="css/validationEngine.jquery.css" type="text/css" media="screen"
+	charset="utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="../../../images/fav-icon.ico" />	
+<style>
+.ui-widget {
+	font-size: x-small;
+}
+</style>
+</head>
+<body>
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<img th:src="@{/images/butter-bun-logo.png}"
+					src="./images/butter-bun-logo.png" alt="Image failed to load"
+					height="50px" width="150px" />
+				<span>Malaysia's Premier Automated Scheduler</span>
+			</div>
+			<div id="header-inf">
+				<a href="feedback" id="custsupportlink">CONTACT CUSTOMER SUPPORT</a>
+			</div>
+			<div class="account-inf">
+				<ul>
+					<li><a href="../logout" id="signout">SIGN OUT</a></li>
+					<li class="editprofile">
+						<div id="editprofile">
+							Hi&#44; <span id="username" style="display: none" th:text="${#authentication.name}">username</span><span th:text="${#authentication.principal.name}">Inban</span><span
+								class="drop-arrow-white"></span> &#124;
+							<div class="drop-menu">
+								<ul class="menu-lvl-1">
+									<li><a href="editprofile">Edit Profile</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="content-wrapper">
+		<div id="nav-wrapper">
+			<ul id="navlist">
+				<li><a href="admin_landing">Create Appointments</a></li>
+				<li class="bold">Manage Appointments<span class="navarrow"></span></li>
+				<li><a href="manageusers.html">Manage Staff &amp; Patrons</a></li>
+				<li><a href="send-notifications">Send Notifications</a></li>
+			</ul>
+		</div>
+		<div id="subcontent-wrapper-ext-right">
+			<div id="subcontent-ext-right">
+				<div id="searchfilters">
+					<form action="search-appointments" th:object="${search}"
+						th:action="@{search-appointments}" method="post" id="searchform">
+						<h3 style="width: 380px">
+							Please select filter criteria and click <input type="button"
+								value="SEARCH" class="button" id="querybutton" />
+						</h3>
+						<ul id="query-items">
+							<li><span>Staff</span> <select id="staffs"
+								th:field="*{staffId}" style="width: 137px;"
+								class="validate[groupRequired[search]" /></li>
+							<li><span>Patron</span> <select id="patrons"
+								th:field="*{patronId}" style="width: 137px;"
+								class="validate[groupRequired[search]" /></li>
+							<li><span>Venue</span> <select id="locations"
+								th:field="*{locationId}" style="width: 137px;"
+								class="validate[groupRequired[search]" /></li>
+							<li><span>Service</span> <select id="services"
+								th:field="*{serviceId}" style="width: 137px;"
+								class="validate[groupRequired[search]" /></li>
+							<li><span>Date</span> <input type="text"
+								id="appointmentdate" th:field="*{searchDate}"
+								style="width: 137px;" class="validate[groupRequired[search]" />
+							</li>
+							<li><span>&nbsp;</span> <input type="hidden"
+								id="appointmenttime" th:field="*{searchTime}" /></li>
+						</ul>
+					</form>
+				</div>
+				<div id="result-list">
+					<div id="result-split" class="subcontent-split"></div>
+					<table id="result-table">
+						<thead>
+							<tr>
+								<th class="th1-ext">Staff</th>
+								<th class="th2-ext">Patron</th>
+								<th class="th3-ext">Venue</th>
+								<th class="th5">Service</th>
+								<th class="th6">Date</th>
+								<th class="th7">Start Time</th>
+								<th class="th7">End Time</th>
+								<th class="th8">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="8" style="padding: 0">
+									<div class="innertable1">
+										<table class="result-table-rows">
+											<tbody>
+												<tr th:each="appointment : ${appointments}">
+													<td class="td1-ext"
+														th:text="${appointment.falconStaff.name}"></td>
+													<td class="td2-ext"><a href="#"
+														th:href="@{patron_group_list(id=${appointment.id})}"
+														th:if="${#lists.size(appointment.falconAppointmentPatrons) > 1}">Patron
+															Group</a>
+														<div
+															th:unless="${#lists.size(appointment.falconAppointmentPatrons) > 1}">
+															<span
+																th:each="patron : ${appointment.falconAppointmentPatrons}">
+																<span
+																th:text="${patron.falconPatron.falconUserByPatron.name}"></span>
+															</span>
+														</div></td>
+													<td class="td3-ext"
+														th:text="${appointment.falconLocation.name}"></td>
+													<td class="td5" th:text="${appointment.falconService.name}"></td>
+													<td class="td6"
+														th:text="${#dates.format(appointment.appointmentDate, 'dd/MM/yyyy')}"></td>
+													<td class="td7"
+														th:text="${#dates.format(appointment.appointmentDate, 'hh:mm aaa')}"></td>
+													<td class="td7"
+														th:text="${#dates.format(appointment.appointmentDateEnd, 'hh:mm aaa')}"></td>
+													<td class="td8">
+														<ul class="schedule-action">
+															<li><a class="remove" href="#"
+																th:id="${appointment.id}">Remove</a></li>
+															<li><a class="reschedule" href="#"
+																th:id="${appointment.id}">Reschedule</a></li>
+															<li><a class="addPatron" href="#"
+																th:id="${appointment.id}">Add Patron</a></li>
+														</ul>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="removeappt-box" class="absoluteleftcenter hidden">
+			<a class="close-box"
+				onclick="document.getElementById('removeappt-box').style.display='none'; document.getElementById('bg').style.display='none';"><img
+				class="whitecross" src="./images/whitecross.png"
+				th:src="@{/images/whitecross.png}" alt="Image failed to load" /><img
+				class="blackcross" src="./images/blackcross.png"
+				th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="removeappt" class="relativeleftcenter">
+				<h2>Confirm delete this appointment?</h2>
+				<ul id="getappointment" class="nopadding">
+					<li><span>Date&#58;</span>
+						<div id="deleteDate"></div></li>
+					<li><span>Time&#58;</span>
+						<div id="deleteTime"></div></li>
+					<li><span>Venue&#58;</span>
+						<div id="deleteLocation"></div></li>
+					<li><span>Staff&#58;</span>
+						<div id="deleteStaff"></div></li>
+					<li><span>Patron&#58;</span>
+						<div id="deletePatrons" style="display: inline-block;"></div></li>
+					<li id="deleteId" style="visibility: hidden;"></li>
+					<li><input class="button" type="button" value="YES"
+						id="delete" /> <input class="button" type="button" value="NO"
+						onclick="document.getElementById('removeappt-box').style.display='none'; document.getElementById('bg').style.display='none';" />
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="rescheduleappt-box" class="absoluteleftcenter hidden">
+			<a class="close-box"
+				onclick="javascript: closeDialog();"><img
+				class="whitecross" src="./images/whitecross.png"
+				th:src="@{/images/whitecross.png}" alt="Image failed to load" /><img
+				class="blackcross" src="./images/blackcross.png"
+				th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="rescheduleappt" class="relativeleftcenter">
+				<h2>Reschedule Existing Appointment</h2>
+				<ul id="rescheduleapptfilter" class="nopadding">
+					<li id="rescheduleId" style="visibility: hidden;"></li>
+					<li id="updateTime" style="visibility: hidden;"></li>
+					<li id="errorMessageLocation" style="visibility: hidden; color: red"></li>
+					<li id="errorMessageStaff" style="visibility: hidden; color: red"></li>
+					<li id="errorMessagePatron" style="visibility: hidden; color: red"></li>
+					<li><span style="font-weight: bold;">Patron&#58;</span>
+						<div id="reschedulePatrons" style="display: inline-block;"></div></li>
+					<li><span style="font-weight: bold;">Staff&#58;</span>
+						<div id="rescheduleStaff"></div></li>
+					<li><span style="font-weight: bold;">Select Date&#58;</span><input
+						id="rescheduleDate" type="text" /></li>
+					<li><span style="font-weight: bold;">Select Start
+							Time&#58;</span><input id="rescheduleTime" type="text" /></li>
+					<li><span style="font-weight: bold;">Select End
+							Time&#58;</span><input id="rescheduleTimeEnd" type="text" /></li>
+					<li><span style="font-weight: bold;">Select Venue&#58;</span><select
+						id="rescheduleVenue"></select></li>
+					<li><input class="button" type="button" id="update"
+						value="UPDATE" /></li>
+				</ul>
+			</div>
+		</div>
+		<div id="createappt-box" class="absoluteleftcenter hidden">
+			<a class="close-box"
+				onclick="javascript: closeDialog();">
+				<img class="whitecross" th:src="@{/images/whitecross.png}"
+				src="./images/whitecross.png" alt="Image failed to load" /> <img
+				th:src="@{/images/blackcross.png}" class="blackcross"
+				src="./images/blackcross.png" alt="Image failed to load" />
+			</a>
+			<form action="update-appointment" th:object="${appointment}"
+				th:action="@{update-appointment}" method="post"
+				id="appointmentupdateform">
+				<div id="createappt" class="relativeleftcenter">
+					<h2>Schedule Appointment</h2>
+					<ul id="addpatronfilter" class="nopadding">
+						<li><span style="font-weight: bold;">Select Patron</span> <select
+							id="managePatronPatrons" th:field="*{falconAppointmentPatrons}"
+							multiple="multiple" style="width: 350px;" class="chzn-select"></select>
+						</li>
+						<li id="managePatronId" style="visibility: hidden;"><input
+							type="hidden" id="appointmentId" th:field="*{id}" /></li>
+						<li><span style="font-weight: bold;">Staff&#58;</span>
+							<div id="managePatronStaff" /></li>
+						<li><span style="font-weight: bold;">Date&#58;</span>
+							<div id="managePatronDate" /></li>
+						<li><span style="font-weight: bold;">Start Time&#58;</span>
+							<div id="managePatronTime" /></li>
+						<li><span style="font-weight: bold;">End Time&#58;</span>
+							<div id="managePatronTimeEnd" /></li>
+						<li><span style="font-weight: bold;">Venue&#58;</span>
+							<div id="managePatronVenue"></div></li>
+						<li><input class="button" type="button"
+							id="updateAppointment" value="UPDATE" /></li>
+					</ul>
+				</div>
+			</form>
+		</div>
+		<div id="bg"></div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer-wrapper">
+		<div id="footer">Apris Solutions &#169; 2013 All Rights Reserved
+		</div>
+	</div>
+	<div id="dialog">
+		<div>Please pick a time</div>
+		<table>
+			<tr>
+				<td><span class="ui-icon ui-icon-circle-triangle-n" id="button-up-hh"/></td>
+				<td><span class="ui-icon ui-icon-circle-triangle-n" id="button-up-mm"/></td>
+				<td><span class="ui-icon ui-icon-circle-triangle-n" id="button-up-ampm"/></td>
+			</tr>
+			<tr>
+				<td><input id="hh" type="text" size="2" /></td>
+				<td><input id="mm" type="text" size="2" /></td>
+				<td><input id="ampm" type="text" size="2" /></td>
+			</tr>
+			<tr>
+				<td><span class="ui-icon ui-icon-circle-triangle-s" id="button-down-hh"/></td>
+				<td><span class="ui-icon ui-icon-circle-triangle-s" id="button-down-mm"/></td>
+				<td><span class="ui-icon ui-icon-circle-triangle-s" id="button-down-ampm"/></td>
+			</tr>
+		</table>
+		<div style="display: none;" id="source-id"></div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/lib/jquery-1.9.1.min.js}"
+		src="js/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery-ui-1.10.2.custom.min.js}"
+		src="js/lib/jquery-ui-1.10.2.custom.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery-ui-timepicker-addon.js}"
+		src="js/lib/jquery-ui-timepicker-addon.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery-ui-sliderAccess.js}"
+		src="js/lib/jquery-ui-sliderAccess.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery.validationEngine.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/languages/jquery.validationEngine-en.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/admin/manage_appointments.js}"
+		src="js/admin/manage_appointments.js"></script>
+	<script type="text/javascript" th:src="@{/js/lib/chosen.jquery.min.js}"
+		src="js/lib/chosen.jquery.min.js"></script>
+</body>
+</html>

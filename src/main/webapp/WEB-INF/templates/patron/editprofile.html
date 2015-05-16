@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Create Appointments</title>
+<link rel="stylesheet" th:href="@{/css/jquery-ui-timepicker-addon.css}"
+	href="css/jquery-ui-timepicker-addon.css" type="text/css" media="screen" charset="utf-8" /> 
+<link rel="stylesheet" th:href="@{/css/smoothness/jquery-ui-1.10.2.custom.min.css}"
+	href="css/smoothness/jquery-ui-1.10.2.custom.min.css" type="text/css" media="screen" charset="utf-8" /> 
+<link rel="stylesheet" th:href="@{/css/styles.css}"
+	href="css/styles.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/layout.css}"
+	href="css/layout.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/chosen.css}"
+	href="css/chosen.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/validationEngine.jquery.css}"
+	href="css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="../../../images/fav-icon.ico" />	
+<style>
+	.ui-widget {
+		font-size: x-small;
+	}
+</style>
+</head>
+<body>
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<img th:src="@{/images/butter-bun-logo.png}" src="./images/butter-bun-logo.png"
+					alt="Image failed to load" height="50px" width="150px" />
+				<span>Malaysia's Premier Automated Scheduler</span>
+			</div>
+			<div id="header-inf">
+				<span id="admin" style="visibility: hidden;" th:text="${patron.falconUserByAdmin.username}" />
+				<a href="feedback" id="custsupportlink">CONTACT
+					CUSTOMER SUPPORT</a>
+			</div>
+			<div class="account-inf">
+				<ul>
+					<li><a href="../logout" id="signout">SIGN OUT</a></li>
+					<li class="editprofile">
+						<div id="editprofile">
+							Hi&#44; <span id="username" style="display: none" th:text="${#authentication.name}">username</span><span th:text="${#authentication.principal.name}">Inban</span><span
+								class="drop-arrow-white"></span> &#124;
+							<div class="drop-menu">
+								<ul class="menu-lvl-1">
+									<li><a href="editprofile.html">Edit Profile</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="content-wrapper">
+		<div id="nav-wrapper">
+			<div id="msg-box" class="bold">
+				<p>Dear User,</p>
+				<p>You may update your profile details here.</p>
+				<p>
+					If you have any feedback, kindly <a href="feedback">Contact
+						Customer Support</a>
+				</p>
+				<p>Thank You.</p>
+				<p>Warm Regards,</p>
+				<p>Butter-Bun Admin</p>
+			</div>
+			<div id="navarrow" class="navarrow">&nbsp;</div>
+		</div>
+		<div id="subcontent-wrapper">
+			<div id="subcontent">
+				<div id="backtodashboard">
+					<img src="./images/green-arrow.png" th:src="@{/images/green-arrow.png}" alt="Image failed to load" />
+					<a href="patron_landing">Back to Dashboard</a>
+				</div>
+				<h3>Edit Profile</h3>
+				<form action="#" th:object="${patron}" th:action="@{update-patron}" method="post" id="patronform">
+					<ul id="editprofile-info">
+							<li>
+								<span>Full Name</span> 
+								<input type="text" th:field="*{falconUserByPatron.name}" id="fullname-patron" size="30" class="validate[required]" />
+							</li>
+							<li>
+								<span>H&#47;P No&#46;</span> 
+								<input type="text" th:field="*{falconUserByPatron.phone}" id="mobilenum-patron" size="30" class="validate[required, custom[phone] ajax[validate-patron-phone]]"/>
+								<span class="notes bold">&nbsp;(Eg: 01XXXXXXXX)</span>
+							</li>
+							<li>
+								<span>Email</span> 
+								<input type="text" th:field="*{falconUserByPatron.email}" id="email-patron" size="30" readonly="readonly"/>
+							</li>
+							<li>
+								<input type="checkbox" id="smsnotification-patron" value="SMS" th:field="*{falconUserByPatron.sendSms}" style="visibility: hidden;" />
+								<input type="checkbox" id="emailnotification-patron" value="Email" th:field="*{falconUserByPatron.sendEmail}" style="visibility: hidden;" />
+								<input type="hidden" th:field="*{falconUserByPatron.nric}" id="identificationnum-patron" />
+								<input type="hidden" th:field="*{falconUserByPatron.username}" id="username-patron" />
+								<input type="hidden" th:field="*{falconUserByPatron.password}" id="pass-patron" />
+								<input type="hidden" th:field="*{falconUserByPatron.valid}" id="valid-patron" />
+							</li>
+					</ul>
+					<div>
+						<input type="submit" value="SUBMIT" class="button" />
+					</div>
+				</form>
+				<div id="org-list">
+					<div id="editprofile-split" class="subcontent-split"></div>
+					<div style="font-style: underline">You are currently a patron
+						of <span th:text="${totalAdmin}"></span> organisations&#58;</div>
+					<ol id="org-members">
+						<li th:each="item : ${admins}" th:text="${item.falconUserByAdmin.name}"></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<div id="sidebar-wrapper">
+			<div id="sidebar" class="bold">
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer-wrapper">
+		<div id="footer">Apris Solutions &#169; 2013 All Rights Reserved
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/lib/jquery-1.9.1.min.js}"
+		src="js/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/lib/jquery.validationEngine.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript" th:src="@{/js/lib/languages/jquery.validationEngine-en.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#patronform').validationEngine();
+		});
+	</script>
+</body>
+</html>

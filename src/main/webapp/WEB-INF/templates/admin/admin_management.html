@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Manage Staff &amp; Patrons</title>
+<link rel="stylesheet" th:href="@{/css/jquery-ui-timepicker-addon.css}"
+	href="css/jquery-ui-timepicker-addon.css" type="text/css"
+	media="screen" charset="utf-8" />
+<link rel="stylesheet"
+	th:href="@{/css/smoothness/jquery-ui-1.10.2.custom.min.css}"
+	href="css/smoothness/jquery-ui-1.10.2.custom.min.css" type="text/css"
+	media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/styles.css}"
+	href="css/styles.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/layout.css}"
+	href="css/layout.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/validationEngine.jquery.css}"
+	href="css/validationEngine.jquery.css" type="text/css" media="screen"
+	charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/template.css}"
+	href="css/template.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="../../../images/fav-icon.ico" />	
+<style>
+.ui-widget {
+	font-size: x-small;
+}
+</style>
+</head>
+<body>
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<img th:src="@{/images/butter-bun-logo.png}"
+					src="./images/butter-bun-logo.png" alt="Image failed to load"
+					height="50px" width="150px" />
+				<span>Malaysia's Premier Automated Scheduler</span>
+			</div>
+			<div id="header-inf">
+				<a href="feedback" id="custsupportlink">CONTACT CUSTOMER SUPPORT</a>
+			</div>
+			<div class="account-inf">
+				<ul>
+					<li><a href="../logout" id="signout">SIGN OUT</a></li>
+					<li class="editprofile">
+						<div id="editprofile">
+							Hi&#44; <span id="username" style="display: none" th:text="${#authentication.name}">username</span><span th:text="${#authentication.principal.name}">Inban</span><span
+								class="drop-arrow-white"></span> &#124;
+							<div class="drop-menu">
+								<ul class="menu-lvl-1">
+									<li><a href="editprofile">Edit Profile</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="content-wrapper">
+		<div id="nav-wrapper">
+			<ul id="navlist">
+				<li><a href="admin_landing">Create Appointments</a></li>
+				<li><a href="manage-appointments">Manage Appointments</a></li>
+				<li class="bold">Manage Staff &amp; Patrons<span
+					class="navarrow"></span></li>
+				<li><a href="send-notifications">Send Notifications</a></li>
+			</ul>
+		</div>
+		<div id="subcontent-wrapper">
+			<div id="subcontent-tabbed">
+				<div id="tab-nav">
+					<ol>
+						<li><a href="#" id='staff-hdr'><span>Staff</span></a></li>
+						<li><a href="#" id='patron-hdr'><span>Patron</span></a></li>
+						<li><a href="#" id='venue-hdr'><span>Venue</span></a></li>
+						<li><a href="#" id='service-hdr'><span>Service</span></a></li>
+					</ol>
+				</div>
+				<div id="tab-window">
+					<div>
+						<span id="patron-error" style="color: red;"></span>
+						<form action="#" th:object="${staff}" th:action="@{create-staff}"
+							method="post" id="staffform">
+							<ul id="staff-info" class="hidden">
+								<li><span>Full Name</span> <input type="text"
+									th:field="*{name}" id="fullname-staff" size="30"
+									class="validate[required] text-input" /></li>
+								<li><span>I&#47;C No&#46;</span> <input type="text"
+									th:field="*{nric}" id="identificationnum-staff" size="30"
+									class="validate[required, ajax[validate-staff-nric]] text-input" />
+									<span class="notes bold">&nbsp;(Eg: 850321102020)</span>
+								</li>
+								<li><span>H&#47;P No&#46;</span> <input type="text"
+									th:field="*{hpTel}" id="mobilenum-staff" size="30"
+									class="validate[required, custom[phone], ajax[validate-staff-phone]] text-input" />
+									<span class="notes bold">&nbsp;(Eg: 01XXXXXXXX)</span>
+								</li>
+								<li><span>Email</span> <input type="text"
+									th:field="*{email}" id="email-staff" size="30"
+									class="validate[required, custom[email], ajax[validate-staff-email]] text-input" />
+								</li>
+								<li><span>Notification Preference</span> <input type="checkbox"
+									id="smsnotification-staff" value="SMS" th:field="*{sendSms}" /><span>SMS</span>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox"
+									id="emailnotification-staff" value="Email"
+									th:field="*{sendEmail}" /><span>Email</span>
+								</li>
+								<li><input type="hidden" th:field="*{id}" id="id-staff" />
+									<input type="hidden" th:field="*{valid}" id="valid-staff" /> <input
+									class="button" type="button" value="SAVE" id="saveStaff" />&nbsp;&nbsp;&nbsp;
+									<a href="#" id="deleteStaff" style="visibility: hidden;">delete</a></li>
+							</ul>
+						</form>
+					</div>
+					<div>
+						<form action="#" th:object="${patron}"
+							th:action="@{create-patron}" method="post" id="patronform">
+							<ul id="patron-info" class="hidden">
+								<li><span>Full Name</span> <input type="text"
+									th:field="*{falconUserByPatron.name}" id="fullname-patron"
+									size="30" class="validate[required] text-input" /></li>
+								<li><span>I&#47;C No&#46;</span> <input type="text"
+									th:field="*{falconUserByPatron.nric}"
+									id="identificationnum-patron" size="30"
+									class="validate[required, ajax[validate-patron-nric]] text-input" />
+									<span class="notes bold">&nbsp;(Eg: 850321102020)</span>
+								</li>
+								<li><span>H&#47;P No&#46;</span> <input type="text"
+									th:field="*{falconUserByPatron.phone}" id="mobilenum-patron"
+									size="30"
+									class="validate[required, custom[phone], ajax[validate-patron-phone]] text-input" />
+									<span class="notes bold">&nbsp;(Eg: 01XXXXXXXX)</span>
+								</li>
+								<li><span>Email</span> <input type="text"
+									th:field="*{falconUserByPatron.email}" id="email-patron"
+									size="30"
+									class="validate[required, custom[email], ajax[validate-patron-email]] text-input" />
+								</li>
+								<li><span>Notification Preference</span> <input type="checkbox"
+									id="smsnotification-patron" value="SMS"
+									th:field="*{falconUserByPatron.sendSms}" /> <span>SMS</span>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox"
+									id="emailnotification-patron" value="Email"
+									th:field="*{falconUserByPatron.sendEmail}" /> <span>Email</span>
+								</li>
+								<li><input type="hidden"
+									th:field="*{falconUserByPatron.username}" id="username-patron" />
+									<input type="hidden" th:field="*{falconUserByPatron.valid}"
+									id="valid-patron" /> <input class="button" type="button"
+									value="SAVE" id="savePatron" />&nbsp;&nbsp;&nbsp;  
+									<a href="#" id="deletePatron" style="visibility: hidden;">delete</a>
+								</li>
+							</ul>
+						</form>
+					</div>
+					<div>
+						<form action="#" th:object="${venue}" th:action="@{create-venue}"
+							method="post" id="venueform">
+							<ul id="venue-info" class="hidden">
+								<li><span>Venue</span> <input type="text"
+									th:field="*{name}" id="venue" size="30" class="validate[required]"/> <input
+									type="hidden" th:field="*{id}" id="venue-id" /> <input
+									type="hidden" th:field="*{valid}" id="venue-valid" /></li>
+								<li>
+									<input class="button" type="button" value="SAVE" id="save-venue" />&nbsp;&nbsp;&nbsp;
+									<a href="#" id="delete-venue" style="visibility: hidden;">delete</a></li>
+							</ul>
+						</form>
+					</div>
+					<div>
+						<form action="#" th:object="${service}"
+							th:action="@{create-service}" method="post" id="serviceform">
+							<ul id="service-info" class="hidden">
+								<li><span>Service</span> <input type="text"
+									th:field="*{name}" id="service" size="30" /> <input
+									type="hidden" th:field="*{id}" id="service-id" /> <input
+									type="hidden" th:field="*{valid}" id="service-valid" /></li>
+								<li><input class="button" type="button" value="SAVE"
+									id="save-service" />&nbsp;&nbsp;&nbsp; 
+									<a href="#"
+									id="delete-service" style="visibility: hidden;">delete</a></li>
+							</ul>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="sidebar-wrapper">
+			<div id="sidebar" class="bold">
+				<div id="msg-box-right">
+				<p>We highly recommend you key in Full Names as stated in the I/C.</p> 
+				<p>You may check/uncheck the notification preferences to enable/disable SMS &amp; E-Mail notifications to the Staff or Patron.</p>
+				<p>Some patrons might not prefer SMS or E-Mail notifications, thus we are providing an option to control this feature.</p>
+				</div>
+			</div>
+		</div>
+		<div id="confirmreg-box-staff" class="absoluteleftcenter hidden">
+			<a class="close-box" onclick="document.getElementById('confirmreg-box-staff').style.display='none'; document.getElementById('bg').style.display='none';">
+				<img class="whitecross" src="./images/whitecross.png" th:src="@{/images/whitecross.png}" 
+				alt="Image failed to load" /><img class="blackcross"
+				src="./images/blackcross.png" th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="confirmreg" class="relativeleftcenter">
+				<h2>Please confirm your details&#58;</h2>
+				<ul id="getregistration" class="nopadding">
+					<li><span>Full Name&#58;</span><div id="confirm-staff-name">Dr&#46; Dre</div></li>
+					<li><span>I&#47;C No&#46;&#58;</span><div id="confirm-staff-nric" >123456790</div></li>
+					<li><span>H&#47;P No&#46;&#58;</span><div id="confirm-staff-hptel" >012-3456789</div></li>
+					<li><span>Email&#58;</span><div id="confirm-staff-email">Dr&#46; Dre&#64;dre.com</div></li>
+					<li><input class="button" type="submit" value="YES"  id="confirm-staff-yes"/><input
+						class="button" type="button" value="NO"
+						onclick="document.getElementById('confirmreg-box-staff').style.display='none'; document.getElementById('bg').style.display='none';" /></li>
+				</ul>
+			</div>
+		</div>
+		<div id="confirmreg-box-patron" class="absoluteleftcenter hidden" style="width: 500px;">
+			<a class="close-box" onclick="document.getElementById('confirmreg-box-patron').style.display='none'; document.getElementById('bg').style.display='none';">
+				<img class="whitecross" src="./images/whitecross.png" th:src="@{/images/whitecross.png}" 
+				alt="Image failed to load" /><img class="blackcross"
+				src="./images/blackcross.png" th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="confirmreg" class="relativeleftcenter">
+				<h2>Please confirm your details&#58;</h2>
+				<ul id="getregistration" class="nopadding">
+					<li><span>Full Name&#58;</span><div id="confirm-patron-name">Dr&#46; Dre</div></li>
+					<li><span>I&#47;C No&#46;&#58;</span><div id="confirm-patron-nric" >123456790</div></li>
+					<li><span>H&#47;P No&#46;&#58;</span><div id="confirm-patron-hptel" >012-3456789</div></li>
+					<li><span>Email&#58;</span><div id="confirm-patron-email">Dr&#46; Dre&#64;dre.com</div></li>
+					<li><input class="button" type="submit" value="YES"  id="confirm-patron-yes"/><input
+						class="button" type="button" value="NO"
+						onclick="document.getElementById('confirmreg-box-patron').style.display='none'; document.getElementById('bg').style.display='none';" /></li>
+				</ul>
+			</div>
+		</div>
+		<div id="confirmreg-box-venue" class="absoluteleftcenter hidden">
+			<a class="close-box" onclick="document.getElementById('confirmreg-box-venue').style.display='none'; document.getElementById('bg').style.display='none';">
+				<img class="whitecross" src="./images/whitecross.png" th:src="@{/images/whitecross.png}" 
+				alt="Image failed to load" /><img class="blackcross"
+				src="./images/blackcross.png" th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="confirmreg" class="relativeleftcenter">
+				<h2>Please confirm your details&#58;</h2>
+				<ul id="getregistration" class="nopadding">
+					<li><span>Name&#58;</span><div id="confirm-venue-name">Dr&#46; Dre</div></li>
+					<li><input class="button" type="submit" value="YES"  id="confirm-venue-yes"/><input
+						class="button" type="button" value="NO"
+						onclick="document.getElementById('confirmreg-box-venue').style.display='none'; document.getElementById('bg').style.display='none';" /></li>
+				</ul>
+			</div>
+		</div>
+		<div id="confirmreg-box-service" class="absoluteleftcenter hidden">
+			<a class="close-box" onclick="document.getElementById('confirmreg-box-service').style.display='none'; document.getElementById('bg').style.display='none';">
+				<img class="whitecross" src="./images/whitecross.png" th:src="@{/images/whitecross.png}" 
+				alt="Image failed to load" /><img class="blackcross"
+				src="./images/blackcross.png" th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="confirmreg" class="relativeleftcenter">
+				<h2>Please confirm your details&#58;</h2>
+				<ul id="getregistration" class="nopadding">
+					<li><span>Name&#58;</span><div id="confirm-service-name">Dr&#46; Dre</div></li>
+					<li><input class="button" type="submit" value="YES"  id="confirm-service-yes"/><input
+						class="button" type="button" value="NO"
+						onclick="document.getElementById('confirmreg-box-service').style.display='none'; document.getElementById('bg').style.display='none';" /></li>
+				</ul>
+			</div>
+		</div>
+		<div id="bg"></div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer-wrapper">
+		<div id="footer">Apris Solutions &#169; 2013 All Rights Reserved
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/lib/jquery-1.9.1.min.js}"
+		src="js/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery-ui-1.10.2.custom.min.js}"
+		src="js/lib/jquery-ui-1.10.2.custom.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery.validationEngine.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/languages/jquery.validationEngine-en.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript" th:src="@{/js/lib/purl.js}"
+		src="js/lib/purl.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/admin/admin_management.js}"
+		src="js/admin/admin_landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<div>
+	<div>Dear {0},</div>
+</div>
+<br/>
+<div>
+	You have requested a password reset. Please click this <a href="www.butter-bun.com/verify-identity/reset?ui={1}">link</a> to be redirected to our password portal.<br/>
+	You may then key in your new password and submit it. You may begin using your new password immediately after resetting it.<br/>
+	If you continue to experience issues with your service, please get our help by dropping us a mail at support@butter-bun.com<br/>
+</div>
+<br/>
+<div>
+	<div>Have a nice day,</div>
+	<div>Apris Solutions</div>
+</div>

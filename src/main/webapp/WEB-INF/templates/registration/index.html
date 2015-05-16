@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Registration Form</title>
+<link rel="stylesheet" th:href="@{/css/validationEngine.jquery.css}"
+	href="css/validationEngine.jquery.css" type="text/css" media="screen"
+	charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/styles.css}"
+	href="css/styles.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" th:href="@{/css/layout.css}"
+	href="css/layout.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="./images/fav-icon.ico" th:href="@{/images/fav-icon.ico}" />
+</head>
+<body>
+	<div id="header-wrapper">
+		<div id="header">
+			<div id="logo">
+				<img th:src="@{/images/butter-bun-logo.png}" src="./images/butter-bun-logo.png"
+					alt="Image failed to load" height="50px" width="150px" />
+				<span>Malaysia's Premier Automated Scheduler</span>
+			</div>
+			<div id="header-inf">
+				<a href="feedback" id="custsupportlink">
+					CONTACT CUSTOMER SUPPORT
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="content-wrapper">
+		<div id="nav-wrapper">
+			<div id="msg-box" class="bold">
+				<p>Dear User,</p>
+				<p>Your E-Mail address is your User ID for future Sign-Ins.</p>
+				<p>You will receive a verification email shortly so be sure to
+					open it and click on the verification link.</p>
+				<p>Proceed to Log In &amp; Schedule Away!</p>
+				<p>Warm Regards,</p>
+				<p>Butter-Bun Admin</p>
+			</div>
+			<div id="navarrow" class="navarrow">&nbsp;</div>
+		</div>
+		<div id="subcontent-wrapper">
+			<div id="subcontent">
+				<h3>Registration Form</h3>
+				<div id="logopos">
+					<img id="org-logo" height="80px" width="80px" th:src="@{/images/client-logo1.png}" 
+						src="./images/client-logo1.png" alt="Image failed to load" />
+				</div>
+				<form action="#" th:object="${registration}" th:action="@{register-user}" method="post" id="registrationform">
+					<ul id="reg-info" class="nopadding">
+						<li>
+							<span>Full Name</span> 
+							<input type="text" th:field="*{fullname}" id="fullname" style="width: 137px;" class="validate[required]"/>
+						</li>
+						<li>
+							<span>I&#47;C No&#46;</span> 
+							<input type="text" th:field="*{nric}" id="identificationnum-patron" style="width: 137px;" 
+								class="validate[required, ajax[validate-reg-nric]]" />
+						</li>
+						<li>
+							<span>H&#47;P No&#46;</span> 
+							<input type="text" th:field="*{phone}" id="mobilenum-patron" style="width: 137px;"
+								class="validate[required, custom[phone], ajax[validate-reg-phone]]" />
+						</li>
+						<li>
+							<span>Email</span> 
+							<input type="text" th:field="*{email}" id="email-patron" style="width: 137px;" 
+								class="validate[required, custom[email], ajax[validate-reg-email]]" />
+							<span class="notes bold">
+								&#40;this will be your User ID&#41;
+							</span>
+						</li>
+						<li>
+							<span>Password</span> 
+							<input type="text" th:field="*{password}" id="password" style="width: 137px;" class="validate[required, minSize[8], maxSize[12]]"/>
+							<span class="notes bold">
+								&#40;between 8-12 characters&#41;
+							</span>
+						</li>
+						<li>
+							<span>Organization</span> 
+							<select id="organization" th:field="*{admin}" style="width: 137px;" class="validate[required]"/>
+						</li>
+						<li>
+							<div class="widget-col1">
+								<img src="captcha/image" /><br />
+								<label id="title1" for="Field1" class="fldTitle">
+									Answer
+									<abbr title="Required Field" class="require">*</abbr>
+								</label>
+								<div class="fieldwrap">
+									<input name="answer" class="validate[required]" />
+								</div>
+							</div>
+						</li>
+					</ul>
+					<div>
+						<input type="button" value="SUBMIT" class="button" id="savePatron" />
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="sidebar-wrapper">
+			<div id="sidebar" class="bold">
+				<div id="ad-banner">ADVERTISING</div>
+			</div>
+		</div>
+		<div id="confirmreg-box" class="absoluteleftcenter hidden">
+			<a class="close-box"
+				onclick="document.getElementById('confirmreg-box').style.display='none'; document.getElementById('bg').style.display='none';"><img
+				class="whitecross" src="./images/whitecross.png" th:src="@{/images/whitecross.png}"
+				alt="Image failed to load" /><img class="blackcross"
+				src="./images/blackcross.png" th:src="@{/images/blackcross.png}" alt="Image failed to load" /></a>
+			<div id="confirmreg" class="relativeleftcenter">
+				<h2>Please confirm your details&#58;</h2>
+				<ul id="getregistration" class="nopadding">
+					<li><span>Full Name&#58;</span><div id="confirm-patron-name">Dr&#46; Dre</div></li>
+					<li><span>I&#47;C No&#46;&#58;</span><div id="confirm-patron-nric" >123456790</div></li>
+					<li><span>H&#47;P No&#46;&#58;</span><div id="confirm-patron-hptel" >012-3456789</div></li>
+					<li><span>Email&#58;</span><div id="confirm-patron-email">Dr&#46; Dre&#64;dre.com</div></li>
+					<li><span>Organization&#58;</span><div id="confirm-patron-org">Dr&#46; Dre&#64;dre.com</div></li>
+					<li><input class="button" type="submit" value="YES" id="confirm-patron-yes"/><input
+						class="button" type="button" value="NO"
+						onclick="document.getElementById('confirmreg-box').style.display='none'; document.getElementById('bg').style.display='none';" /></li>
+				</ul>
+			</div>
+		</div>
+		<div id="bg"></div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer-wrapper">
+		<div id="footer">Apris Solutions &#169; 2013 All Rights Reserved
+		</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/lib/jquery-1.9.1.min.js}"
+		src="js/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/jquery.validationEngine.js}"
+		src="js/lib/jquery.validationEngine.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/lib/languages/jquery.validationEngine-en.js}"
+		src="js/lib/jquery.validationEngine-en.js"></script>
+	<script type="text/javascript"
+		th:src="@{/js/registration/index.js}"
+		src="js/js/registration/index.js"></script>
+</body>
+</html>
